@@ -1,18 +1,12 @@
-#menu
-  = link_to '...'.html_safe, root_path
-  &gt;
-  - for category in @category.ancestors
-    = link_to category, category_path(category)
-    &gt;
-  = link_to @category, category_path(@category)
 %h1
   = @category
-%ul
+%ul.stack.button-group
   - for category in @category.children
     %li
-      = link_to category, category_path(category)
+      = link_to category, category_path(category), :class => 'button'
 %hr
-%ul
-  - for product in @category.products
-    %li
-      = link_to product, product_path(product)
+.button-bar
+  %ul.button-group
+    - for product in @category.products
+      %li
+        = link_to product, product_path(product), :class => 'button'

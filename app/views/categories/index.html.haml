@@ -1,5 +1,5 @@
 %h1 Categories
-%ul
+%ul.stack.button-group
   - for category in @categories
     %li
-      = link_to category, category_path(category)
+      = link_to category, category_path(category), :class => 'button'

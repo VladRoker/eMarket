@@ -10,6 +10,10 @@ class Product < ActiveRecord::Base
     name
   end
 
+  def available()
+    self.quantity > 0 && self.price > 0
+  end
+
   private
 
   def set_defaults

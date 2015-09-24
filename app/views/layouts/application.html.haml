@@ -2,10 +2,26 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}/
     %title
       = content_for?(:title) ? yield(:title) : "eMarket"
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "vendor/modernizr"
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body
+  %body#container
+    #menu
+      %span
+        = link_to '...'.html_safe, root_path
+        - unless @category.nil?
+          &gt;
+          - for category in @category.ancestors
+            = link_to category, category_path(category)
+            &gt;
+          = link_to @category, category_path(@category)
+          - unless @product.nil?
+            &gt;
+            = link_to @product, product_path(@product)
+      %span.right
+        = link_to "You have #{pluralize(cart.length, 'product')} in your cart", ''
     = yield

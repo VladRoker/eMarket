@@ -1,0 +1,33 @@
+html, body {
+  background-color: #4B7399;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+}
+
+a {
+  color: #0000FF;
+  img { border: none; }
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#menu {
+  width: 98%;
+  margin: 5px 0px;
+  background-color: #FFF;
+  padding: 2px 4px;
+  border: solid 1px black;
+}
