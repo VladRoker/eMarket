@@ -1,10 +1,16 @@
 ENV['RAILS_ENV'] ||= 'test'
+require 'database_cleaner'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'minitest/spec'
+DatabaseCleaner.strategy = :truncation
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
-  fixtures :all
+  DatabaseCleaner.clean
+  include FactoryGirl::Syntax::Methods
+end
 
-  # Add more helper methods to be used by all tests here...
+class MiniTest::Spec
+  DatabaseCleaner.clean
+  include FactoryGirl::Syntax::Methods
 end

@@ -1,0 +1,5 @@
+%h1 Categories
+%ul
+  - for category in @categories
+    %li
+      = link_to category, category_path(category)

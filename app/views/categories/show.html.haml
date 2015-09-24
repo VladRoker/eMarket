@@ -1,0 +1,18 @@
+#menu
+  = link_to '...'.html_safe, root_path
+  &gt;
+  - for category in @category.ancestors
+    = link_to category, category_path(category)
+    &gt;
+  = link_to @category, category_path(@category)
+%h1
+  = @category
+%ul
+  - for category in @category.children
+    %li
+      = link_to category, category_path(category)
+%hr
+%ul
+  - for product in @category.products
+    %li
+      = link_to product, product_path(product)

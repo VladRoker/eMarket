@@ -1,0 +1,13 @@
+#menu
+  = link_to '...'.html_safe, root_path
+  &gt;
+  - for category in @category.ancestors
+    = link_to category, category_path(category)
+    &gt;
+  = link_to @category, category_path(@category)
+  &gt;
+  = link_to @product, product_path(@product)
+%h1
+  = @product
+.price
+  = money_helper(@product,'$ ')
