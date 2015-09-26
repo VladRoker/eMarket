@@ -51,6 +51,9 @@ group :development, :test do
   gem 'guard-bundler',  require: false
   gem 'guard-rspec',    require: false
   gem 'guard-minitest', require: false
+end
+
+group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner', '~> 1.5.0'
 end
