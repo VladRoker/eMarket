@@ -10,6 +10,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body#container
+    Hello, 
+    - if current_user.nil?
+      Guest!
+      = link_to ' Login', login_path
+      or
+      = link_to 'Register', registration_path
+    - else
+      = current_user.name
+      = link_to '( logout )', destroy_user_session_path
     #menu
       %span
         = link_to '...'.html_safe, root_path

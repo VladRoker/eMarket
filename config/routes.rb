@@ -8,6 +8,15 @@ Rails.application.routes.draw do
   resources :categories,  only: [:index, :show]
   resources :products,    only: [:show]
 
+  # these routes are for showing users a login form, logging them in, and logging them out.
+  get '/login' => 'sessions#new', as: 'login'
+  post '/login' => 'sessions#create', as: 'sign_in'
+  get '/logout' => 'sessions#destroy', as: 'destroy_user_session'
+
+  # these routes are for user registration and sign up form
+  get '/registration' => 'users#new', as: 'registration'
+  post '/users' => 'users#create', as: 'sign_up'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

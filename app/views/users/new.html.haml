@@ -1,0 +1,18 @@
+%h1 Register!
+
+= form_for @user, url: sign_up_path do |f|
+
+  .large-3
+    Name:
+    = f.text_field :name, :placeholder => 'Name'
+  .large-3
+    Email:
+    = f.email_field :email, :placeholder => 'Email'
+  .large-3
+    Password:
+    = f.password_field :password, :placeholder => 'Password'
+  .large-3
+    Password Confirmation:
+    = f.password_field :password_confirmation, :placeholder => 'Password Confirmation'
+
+  = f.submit "Submit", :class=>'button'
