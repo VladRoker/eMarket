@@ -56,5 +56,8 @@ end
 group :test do
   gem 'factory_girl_rails'
   gem 'database_cleaner', '~> 1.5.0'
+  gem 'capybara'
+  gem "capybara-webkit"
+  gem 'capybara_minitest_spec'
 end
 

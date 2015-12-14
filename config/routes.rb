@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   resources :categories,  only: [:index, :show]
   resources :products,    only: [:show]
+  resources :orders,      only: [:new, :create]
+
+  # this action adds product to cart
+  post 'product/add' => 'products#add', as: 'add_product'
 
   # these routes are for showing users a login form, logging them in, and logging them out.
   get '/login' => 'sessions#new', as: 'login'

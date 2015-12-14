@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   before_validation :set_defaults
   belongs_to :category
+  has_and_belongs_to_many :orders
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
   validates :category_id, presence: true
@@ -10,8 +11,12 @@ class Product < ActiveRecord::Base
     name
   end
 
-  def available()
+  def available?
     self.quantity > 0 && self.price > 0
+  end
+
+  def full_price
+    self.sale_flag ? self.discount : self.price
   end
 
   private

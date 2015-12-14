@@ -32,4 +32,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :order do
+    user
+    price 10.00
+    status 'new'
+    after(:create) do |order|
+      3.times { order.products << FactoryGirl.create(:available_product) }
+    end
+  end
 end

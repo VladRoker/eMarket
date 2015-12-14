@@ -2,4 +2,11 @@
   = @product
 .price.panel.callout
   = money_helper(@product,'$ ')
-= link_to 'Get it now!', '', :class => 'button'
+= form_tag add_product_path
+= hidden_field_tag 'id', @product.id
+.small-1
+  = number_field_tag 'count', '1'
+- if @product.available?
+  = submit_tag 'Get it now!', :class => 'button'
+- else
+  %h3 Temporary unavailable

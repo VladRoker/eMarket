@@ -19,6 +19,9 @@
     - else
       = current_user.name
       = link_to '( logout )', destroy_user_session_path
+    - if flash[:notice]
+      .notice
+        = flash[:notice]
     #menu
       %span
         = link_to '...'.html_safe, root_path
@@ -32,5 +35,5 @@
             &gt;
             = link_to @product, product_path(@product)
       %span.right
-        = link_to "You have #{pluralize(cart.length, 'product')} in your cart", ''
+        = link_to "You have #{pluralize(cart.length, 'product')} in your cart", new_order_path
     = yield

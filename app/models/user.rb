@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password validations: false
 
-  validates :email, uniqueness: true
+  validates :email,     uniqueness: true
 
   def guest?
     self.password_digest.nil?

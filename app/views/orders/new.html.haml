@@ -1,0 +1,24 @@
+- if cart.empty?
+  %h1 Your cart is empty
+- else
+  %h1 Few last steps:
+  %h2 double check your products:
+  %ul.panel
+    - @total = 0.00
+    - for prod, quan in cart # {:product_id.to_s => quantity:to_i }
+      - pro = Product.find(prod.to_i)
+      - @total = @total + pro.full_price * quan.to_i
+      %li
+        = "#{quan.to_i} x #{pro.name} (#{pro.full_price * quan.to_i})"
+  %h3
+    Total :
+    = number_to_currency(@total,:unit => '$ ')
+  %hr
+
+  = form_for @order do |f|
+    %div
+      Buy as 
+      = current_user.name
+      = link_to '( logout )', destroy_user_session_path
+    %div
+      = f.submit 'Ready!', :class => 'button'
