@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -20,6 +21,8 @@ Rails.application.routes.draw do
   # these routes are for user registration and sign up form
   get '/registration' => 'users#new', as: 'registration'
   post '/users' => 'users#create', as: 'sign_up'
+
+  get "/#{ADMIN_ROUTE}" => 'admins#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

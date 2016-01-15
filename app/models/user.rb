@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   def guest?
     self.password_digest.nil?
   end
+
+  def admin?
+  	false
+  end
 end
