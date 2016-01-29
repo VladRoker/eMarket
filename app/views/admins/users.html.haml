@@ -1,0 +1,13 @@
+%h2 Clients List:
+%ul
+  - for user in @users
+    %li
+      = link_to user, admin_user_page_path(user.id)
+      from:
+      %i
+        = user.email
+      ; Registered:
+      %i
+        = user.created_at 
+      - if user.admin?
+        %span ; Has Administrator privileges

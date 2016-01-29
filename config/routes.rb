@@ -23,6 +23,9 @@ Rails.application.routes.draw do
   post '/users' => 'users#create', as: 'sign_up'
 
   get "/#{ADMIN_ROUTE}" => 'admins#index'
+  patch "/#{ADMIN_ROUTE}" => 'admins#update'
+  get "/#{ADMIN_ROUTE}/users" => 'admins#users', as: 'admin_users'
+  get "/#{ADMIN_ROUTE}/user/:id" => 'admins#user', as: 'admin_user_page'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

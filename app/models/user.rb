@@ -7,7 +7,11 @@ class User < ActiveRecord::Base
     self.password_digest.nil?
   end
 
+  def to_s
+    name
+  end
+
   def admin?
-  	false
+    admin_flag
   end
 end

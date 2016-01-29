@@ -32,3 +32,9 @@ a {
   padding: 2px 4px;
   border: solid 1px black;
 }
+
+a.disabled {
+  color: grey;
+  text-decoration: line-through;
+  cursor: default;
+}

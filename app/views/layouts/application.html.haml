@@ -17,7 +17,9 @@
       or
       = link_to 'Register', registration_path
     - else
-      = current_user.name
+      = current_user
+      - if current_user.admin?
+        = link_to '{Admin Panel}', admin_path
       = link_to '( logout )', destroy_user_session_path
     - if flash[:notice]
       .notice
