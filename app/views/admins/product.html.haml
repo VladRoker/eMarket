@@ -1,0 +1,15 @@
+.large-4.small-12.medium-7
+  = form_for @product, url: admin_path do |f|
+    = f.hidden_field :id
+    = f.text_field :name, :placeholder => 'name'
+    = f.text_field :description, :placeholder => 'description'
+    = f.text_field :quantity, :placeholder => 'quantity'
+    %hr
+    = f.text_field :price, :placeholder => 'price'
+    = f.text_field :discount, :placeholder => 'discount'
+    On sale
+    = f.check_box :sale_flag
+    %hr
+    = f.collection_select :category_id, categories, :id, :name
+    = f.submit 'Save', :class => 'button'
+  = link_to 'Delete', admin_delete_path(:product, @product.id), :method => :delete, :confirm => 'Realy delete?'

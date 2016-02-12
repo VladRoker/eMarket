@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  helper_method :cart, :to_cart, :current_user, :user_params
+  helper_method :cart, :to_cart, :current_user, :user_params, :categories
 
   def cart
     session && session[:products] ? session[:products] : {}
@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
         # session key products store hash where key is product ID and value is quantity
       end
     end
+  end
+
+  def categories
+    @categories = Category.all.to_a
   end
 
   def current_user

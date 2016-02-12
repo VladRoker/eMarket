@@ -1,0 +1,5 @@
+%ul
+  - categories.each do |category|
+    %li
+      = link_to category, admin_category_page_path(category.id)
+= link_to 'Create', admin_new_category_path, :class => 'button'

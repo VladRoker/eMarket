@@ -24,8 +24,16 @@ Rails.application.routes.draw do
 
   get "/#{ADMIN_ROUTE}" => 'admins#index'
   patch "/#{ADMIN_ROUTE}" => 'admins#update'
+  post "/#{ADMIN_ROUTE}" => 'admins#create'
+  delete "/#{ADMIN_ROUTE}/:type/:id" => 'admins#delete', as: 'admin_delete'
   get "/#{ADMIN_ROUTE}/users" => 'admins#users', as: 'admin_users'
   get "/#{ADMIN_ROUTE}/user/:id" => 'admins#user', as: 'admin_user_page'
+  get "/#{ADMIN_ROUTE}/categories" => 'admins#categories_index', as: 'admin_categories'
+  get "/#{ADMIN_ROUTE}/category/new" => 'admins#new_category', as: 'admin_new_category'
+  get "/#{ADMIN_ROUTE}/category/:id" => 'admins#category', as: 'admin_category_page'
+  get "/#{ADMIN_ROUTE}/products" => 'admins#products', as: 'admin_products'
+  get "/#{ADMIN_ROUTE}/product/new" => 'admins#new_product', as: 'admin_new_product'
+  get "/#{ADMIN_ROUTE}/product/:id" => 'admins#product', as: 'admin_product_page'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

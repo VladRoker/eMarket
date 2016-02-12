@@ -1,0 +1,5 @@
+%ul
+  - @products.each do |product|
+    %li
+      = link_to product, admin_category_page_path(product.id)
+= link_to 'Create', admin_new_product_path, :class => 'button'

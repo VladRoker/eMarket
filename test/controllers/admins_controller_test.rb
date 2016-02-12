@@ -22,6 +22,34 @@ class AdminsControllerTest < ActionController::TestCase
     get :user, {:id => user.id}, {:user_id => nil}
     assert_response 401
   end
+  test "should not get categories if guest" do
+    get :categories, nil, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get category if guest" do
+    category = create(:category)
+    category.save!
+    get :category, {:id => category.id}, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get new category page if guest" do
+    get :new_category, nil, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get products if guest" do
+    get :products, nil, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get product if guest" do
+    product = create(:product)
+    product.save!
+    get :product, {:id => product.id}, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get new product page if guest" do
+    get :new_product, nil, {:user_id => nil}
+    assert_response 401
+  end
   # Users
   test "should not get update if user" do
     patch :update, nil, {:user_id => user.id}
@@ -39,6 +67,34 @@ class AdminsControllerTest < ActionController::TestCase
     get :user, {:id => user.id}, {:user_id => user.id}
     assert_response 401
   end
+  test "should not get categories if user" do
+    get :categories, nil, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get category if user" do
+    category = create(:category)
+    category.save!
+    get :category, {:id => category.id}, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get new category page if user" do
+    get :new_category, nil, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get products if user" do
+    get :products, nil, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get product if user" do
+    product = create(:product)
+    product.save!
+    get :product, {:id => product.id}, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get new product page if user" do
+    get :new_product, nil, {:user_id => user.id}
+    assert_response 401
+  end
   # Administrator
   test "should get update if admin" do
     patch :update, {user:{:id => user.id}}, {:user_id => admin.id}
@@ -54,6 +110,34 @@ class AdminsControllerTest < ActionController::TestCase
   end
   test "should get user if admin" do
     get :user, {:id => user.id}, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get categories if admin" do
+    get :categories, nil, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get category if admin" do
+    category = create(:category)
+    category.save!
+    get :category, {:id => category.id}, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get new category page if admin" do
+    get :new_category, nil, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get products if admin" do
+    get :products, nil, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get product if admin" do
+    product = create(:product)
+    product.save!
+    get :product, {:id => product.id}, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get new product page if admin" do
+    get :new_product, nil, {:user_id => admin.id}
     assert_response :success
   end
 end
