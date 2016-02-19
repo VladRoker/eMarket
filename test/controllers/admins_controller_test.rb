@@ -5,7 +5,9 @@ class AdminsControllerTest < ActionController::TestCase
   user.save!
   admin = create(:admin)
   admin.save!
+  ###########
   # Guests
+  ###########
   test "should not get update if guest" do
     patch :update, nil, {:user_id => nil}
     assert_response 401
@@ -23,7 +25,7 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response 401
   end
   test "should not get categories if guest" do
-    get :categories, nil, {:user_id => nil}
+    get :categories_index, nil, {:user_id => nil}
     assert_response 401
   end
   test "should not get category if guest" do
@@ -50,7 +52,15 @@ class AdminsControllerTest < ActionController::TestCase
     get :new_product, nil, {:user_id => nil}
     assert_response 401
   end
+  test "should not delete anything if guest" do
+    category = create(:category)
+    category.save!
+    get :delete, {:type => 'category', :id => category.id}, {:user_id => nil}
+    assert_response 401
+  end
+  ###########
   # Users
+  ###########
   test "should not get update if user" do
     patch :update, nil, {:user_id => user.id}
     assert_response 401
@@ -68,7 +78,7 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response 401
   end
   test "should not get categories if user" do
-    get :categories, nil, {:user_id => user.id}
+    get :categories_index, nil, {:user_id => user.id}
     assert_response 401
   end
   test "should not get category if user" do
@@ -95,7 +105,15 @@ class AdminsControllerTest < ActionController::TestCase
     get :new_product, nil, {:user_id => user.id}
     assert_response 401
   end
+  test "should not delete anything if user" do
+    category = create(:category)
+    category.save!
+    get :delete, {:type => 'category', :id => category.id}, {:user_id => user.id}
+    assert_response 401
+  end
+  ###########
   # Administrator
+  ###########
   test "should get update if admin" do
     patch :update, {user:{:id => user.id}}, {:user_id => admin.id}
     assert_response :found
@@ -113,7 +131,7 @@ class AdminsControllerTest < ActionController::TestCase
     assert_response :success
   end
   test "should get categories if admin" do
-    get :categories, nil, {:user_id => admin.id}
+    get :categories_index, nil, {:user_id => admin.id}
     assert_response :success
   end
   test "should get category if admin" do
@@ -139,5 +157,11 @@ class AdminsControllerTest < ActionController::TestCase
   test "should get new product page if admin" do
     get :new_product, nil, {:user_id => admin.id}
     assert_response :success
+  end
+  test "should not delete anything if admin" do
+    category = create(:category)
+    category.save!
+    delete :delete, {:type => 'category', :id => category.id}, {:user_id => admin.id}
+    assert_response :found
   end
 end
