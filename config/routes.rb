@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get "/#{ADMIN_ROUTE}/products" => 'admins#products', as: 'admin_products'
   get "/#{ADMIN_ROUTE}/product/new" => 'admins#new_product', as: 'admin_new_product'
   get "/#{ADMIN_ROUTE}/product/:id" => 'admins#product', as: 'admin_product_page'
+  get "/#{ADMIN_ROUTE}/orders" => 'admins#orders', as: 'admin_orders'
+  get "/#{ADMIN_ROUTE}/order/:id" => 'admins#order', as: 'admin_order_page'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

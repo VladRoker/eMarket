@@ -38,10 +38,16 @@ class AdminsController < ApplicationController
     @product = Product.new
   end
 
+  def orders
+    @orders = Order.all
+  end
+
+  def order
+    @order = Order.find params[:id]
+  end
+
   def create
-    if params[:order]
-      render :json => params[:order]
-    elsif params[:product]
+    if params[:product]
       product = Product.new(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity))
       if product
         product.save!
@@ -82,7 +88,11 @@ class AdminsController < ApplicationController
       end
       redirect_to admin_user_page_path(params[:user][:id] || '0')
     elsif params[:order]
-      render :json => params[:order]
+      order = Order.find(params[:order][:id])
+      if order
+        order.update_attributes(params.require(:order).permit(:price, :status))
+      end
+      redirect_to admin_order_page_path(params[:order][:id] || '0')
     elsif params[:product]
       product = Product.find(params[:product][:id])
       if product

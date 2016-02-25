@@ -1,0 +1,22 @@
+.large-4.small-12.medium-7
+  = link_to @order.user, admin_user_page_path(@order.user.id)
+  %br
+  Created at:
+  = format_time @order.created_at
+  - unless @order.updated_at == @order.created_at
+    %br
+    Updated at:
+    = format_time @order.updated_at
+  %hr
+  %ul
+    Products:
+    - @order.products.each do |product|
+      %li
+        = product
+  %br
+  %hr
+  = form_for @order, url: admin_path do |f|
+    = f.hidden_field :id
+    = f.text_field :price, :placeholder => 'price'
+    = f.collection_select :status, @order.statuses, :to_s, :to_s
+    = f.submit 'Save', :class => 'button'
