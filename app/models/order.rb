@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
+  belongs_to :coupon
   has_and_belongs_to_many :products
 
   validates :status,  presence: true

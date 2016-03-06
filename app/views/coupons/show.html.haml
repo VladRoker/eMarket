@@ -1,0 +1,22 @@
+= link_to '<< Back to coupons', coupons_path
+%br
+%br
+- if @coupon.used?
+  Coupon used 
+  = @coupon.updated_at
+- else
+  - if @coupon.amount
+    Coupon for
+    = number_to_currency(@coupon.amount)
+  - if @coupon.percent
+    Coupon for
+    = number_to_percentage(@coupon.percent, precision: 0)
+  - unless @coupon.products.empty?
+    %br
+    Valid for:
+    %ul
+      - @coupon.products.each do |product|
+        %li
+          = link_to product, product_path(product.id)
+%br
+= link_to "Throw away coupon", coupon_path(@coupon.id), :method => :DELETE, data: { confirm: "Are you sure?" }

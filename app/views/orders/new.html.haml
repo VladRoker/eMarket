@@ -21,4 +21,5 @@
       = current_user.name
       = link_to '( logout )', destroy_user_session_path
     %div
+      = f.collection_select :coupon, current_user.coupons, :id, :to_s, :prompt => "Coupons"
       = f.submit 'Ready!', :class => 'button'

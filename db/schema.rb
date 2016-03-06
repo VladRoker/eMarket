@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113112416) do
+ActiveRecord::Schema.define(version: 20160304185243) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -23,12 +23,31 @@ ActiveRecord::Schema.define(version: 20160113112416) do
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
 
+  create_table "coupons", force: :cascade do |t|
+    t.text     "code"
+    t.integer  "percent"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.integer  "user_id"
+    t.boolean  "used_flag"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "coupons_products", id: false, force: :cascade do |t|
+    t.integer "coupon_id"
+    t.integer "product_id"
+  end
+
+  add_index "coupons_products", ["coupon_id"], name: "index_coupons_products_on_coupon_id"
+  add_index "coupons_products", ["product_id"], name: "index_coupons_products_on_product_id"
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
     t.decimal  "price",      precision: 8, scale: 2, null: false
     t.string   "status",                             null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.integer  "coupon_id"
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"

@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'categories#index'
 
-  resources :categories,  only: [:index, :show]
-  resources :products,    only: [:show]
-  resources :orders,      only: [:new, :create]
+  resources :categories,  only:   [:index, :show]
+  resources :products,    only:   [:show]
+  resources :orders,      only:   [:new, :create]
+  resources :coupons,     except: [:edit, :update]
 
   # this action adds product to cart
   post 'product/add' => 'products#add', as: 'add_product'

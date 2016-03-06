@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   before_validation :set_defaults
   belongs_to :category
   has_and_belongs_to_many :orders
+  has_and_belongs_to_many :coupons
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
   validates :category_id, presence: true

@@ -1,0 +1,4 @@
+.large-4.small-12.medium-7
+  = form_for @coupon do |f|
+    = f.text_field :code, :placeholder => 'Enter coupon code'
+    = f.submit 'Verify', :class => 'button'

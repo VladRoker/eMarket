@@ -13,7 +13,15 @@
     - @order.products.each do |product|
       %li
         = product
-  %br
+        = '(' + number_to_currency(product.price) + ')'
+  -unless @order.coupon_id.nil?
+    - @coupon = Coupon.unscoped.find @order.coupon_id
+    Coupon:
+    = @coupon
+    -if @coupon.amount
+      = '(' + number_to_currency(@coupon.amount) + ')'
+    - if @coupon.percent
+      = '(' + number_to_percentage(@coupon.percent, precision: 0) + ')'
   %hr
   = form_for @order, url: admin_path do |f|
     = f.hidden_field :id

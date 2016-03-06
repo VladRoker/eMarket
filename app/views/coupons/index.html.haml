@@ -1,0 +1,5 @@
+= link_to 'Enter coupon code', new_coupon_path
+%ul
+  - @coupons.each do |coupon|
+    %li
+      = link_to coupon, coupon_path(coupon.id)

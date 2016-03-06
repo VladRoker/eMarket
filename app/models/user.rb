@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 
   validates :email,     uniqueness: true
 
+  has_many :coupons
+
   def guest?
     self.password_digest.nil?
   end

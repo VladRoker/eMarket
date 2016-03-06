@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
   factory :subcategory do
     sequence(:name){|n| "Laptops_#{n}" }
-    description "Portatable PC"
+    description "Portable PC"
     parent FactoryGirl.create(:category)
   end
 
@@ -31,6 +31,18 @@ FactoryGirl.define do
       password "secret"
       factory :admin do
         admin_flag true
+      end
+    end
+  end
+
+  factory :coupon do
+    code 'CX-FBT-12ER-VL002-CRG'
+    percent 50
+    amount 220.99
+    factory :registred_coupon do
+      user
+      factory :user_coupon do
+        used_flag true
       end
     end
   end

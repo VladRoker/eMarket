@@ -22,6 +22,23 @@ class OrdersController < ApplicationController
         @price = @price + pro.full_price * quan.to_i
         @products = true
       end
+      if params[:order][:coupon]
+        @coupon = Coupon.find_by_id params[:order][:coupon]
+        unless @coupon.nil?
+          order.coupon = @coupon
+          if @coupon.amount
+            @price -= @coupon.amount
+          end
+          if @coupon.percent
+            @price *= 1-(@coupon.percent/100.to_f)
+          end
+          if @price < 0
+            @price = 0
+          end
+        end
+        @coupon.used_flag = true
+        @coupon.save!
+      end
       order.price = @price
       if @products && order.save
         session[:products] = {} # clear cart

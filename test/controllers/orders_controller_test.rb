@@ -1,8 +1,13 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
-  test "get order" do
+  test "get order redirects if guest" do
     get :new
+    assert_response :found
+  end
+  test "get order if user" do
+    @user = create(:registred_user)
+    get :new, nil, {user_id: @user.id}
     assert_response :success
   end
   # test "save empty order fails" do

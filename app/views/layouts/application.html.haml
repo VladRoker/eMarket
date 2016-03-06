@@ -38,4 +38,6 @@
             = link_to @product, product_path(@product)
       %span.right
         = link_to "You have #{pluralize(cart.length, 'product')} in your cart", new_order_path
+        |
+        = link_to "Coupons", coupons_path
     = yield
