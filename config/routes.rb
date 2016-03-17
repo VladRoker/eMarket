@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'categories#index'
+  get "/contacts" => 'users#contacts', as: 'contacts'
 
   resources :categories,  only:   [:index, :show]
   resources :products,    only:   [:show]
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
   patch "/#{ADMIN_ROUTE}" => 'admins#update'
   post "/#{ADMIN_ROUTE}" => 'admins#create'
   delete "/#{ADMIN_ROUTE}/:type/:id" => 'admins#delete', as: 'admin_delete'
+  get "/#{ADMIN_ROUTE}/contacts" => 'admins#contacts', as: 'admin_contacts'
+  get "/#{ADMIN_ROUTE}/contacts/new" => 'admins#new_contact', as: 'admin_new_contacts'
   get "/#{ADMIN_ROUTE}/users" => 'admins#users', as: 'admin_users'
   get "/#{ADMIN_ROUTE}/user/:id" => 'admins#user', as: 'admin_user_page'
   get "/#{ADMIN_ROUTE}/categories" => 'admins#categories_index', as: 'admin_categories'

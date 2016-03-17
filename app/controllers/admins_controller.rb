@@ -3,6 +3,14 @@ class AdminsController < ApplicationController
   def index
   end
 
+  def new_contact
+    @contact = Contact.new
+  end
+
+  def contacts
+    @contacts = Contact.all
+  end
+
   def users
     @users = User.all
   end
@@ -63,6 +71,12 @@ class AdminsController < ApplicationController
       render :json => params[:cupon]
     elsif params[:delivery]
       render :json => params[:delivery]
+    elsif params[:contact]
+      contact = Contact.new(params.require(:contact).permit(:language, :name, :adress, :phone, :email, :company_name, :company_reg_nr, :company_vat_nr, :bank, :time_table, :description))
+      if contact
+        contact.save!
+      end
+      redirect_to admin_contacts_path
     else
       render :text => 'nil'
     end
@@ -75,6 +89,9 @@ class AdminsController < ApplicationController
     elsif params[:type] == 'product'
       Product.find(params[:id]).delete
       redirect_to admin_product_path
+    elsif params[:type] == 'contact'
+      Contact.find(params[:id]).delete
+      redirect_to admin_contacts_path
     else
       redirect_to admin_path
     end
@@ -109,8 +126,12 @@ class AdminsController < ApplicationController
       render :json => params[:cupon]
     elsif params[:delivery]
       render :json => params[:delivery]
-    elsif params[:info]
-      render :json => params[:info]
+    elsif params[:contact]
+      contact = Contact.find(params[:contact][:id])
+      if contact
+        contact.update_attributes(params.require(:contact).permit(:language, :name, :adress, :phone, :email, :company_name, :company_reg_nr, :company_vat_nr, :bank, :time_table, :description))
+      end
+      redirect_to admin_contacts_path
     else
       render :text => 'nil'
     end

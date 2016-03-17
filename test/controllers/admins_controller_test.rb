@@ -62,6 +62,14 @@ class AdminsControllerTest < ActionController::TestCase
     get :order, {:id => order.id}, {:user_id => nil}
     assert_response 401
   end
+  test "should not get new contacts page if guest" do
+    get :new_contact, nil, {:user_id => nil}
+    assert_response 401
+  end
+  test "should not get contacts if guest" do
+    get :contacts, nil, {:user_id => nil}
+    assert_response 401
+  end
   test "should not delete anything if guest" do
     category = create(:category)
     category.save!
@@ -125,6 +133,14 @@ class AdminsControllerTest < ActionController::TestCase
     get :order, {:id => order.id}, {:user_id => user.id}
     assert_response 401
   end
+  test "should not get new contacts page if user" do
+    get :new_contact, nil, {:user_id => user.id}
+    assert_response 401
+  end
+  test "should not get contacts if user" do
+    get :contacts, nil, {:user_id => user.id}
+    assert_response 401
+  end
   test "should not delete anything if user" do
     category = create(:category)
     category.save!
@@ -186,6 +202,14 @@ class AdminsControllerTest < ActionController::TestCase
     order = create(:order)
     order.save!
     get :order, {:id => order.id}, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get new contacts page if admin" do
+    get :new_contact, nil, {:user_id => admin.id}
+    assert_response :success
+  end
+  test "should get contacts if admin" do
+    get :contacts, nil, {:user_id => admin.id}
     assert_response :success
   end
   test "should not delete anything if admin" do

@@ -1,0 +1,14 @@
+.large-4.small-12.medium-7
+  = form_for @contact, url: admin_path do |f|
+    = f.text_field :language, :placeholder => 'Language'
+    = f.text_field :name, :placeholder => 'Name'
+    = f.text_field :adress, :placeholder => 'Adress'
+    = f.text_field :phone, :placeholder => 'Phone'
+    = f.text_field :email, :placeholder => 'E-mail'
+    = f.text_field :company_name, :placeholder => 'Company name'
+    = f.text_field :company_reg_nr, :placeholder => 'Registration Nr.'
+    = f.text_field :company_vat_nr, :placeholder => 'VAT Nr.'
+    = f.text_field :bank, :placeholder => 'Bank account Nr.'
+    = f.text_field :time_table, :placeholder => 'Time table'
+    = f.text_field :description, :placeholder => 'Description'
+    = f.submit 'Save', :class => 'button'

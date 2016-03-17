@@ -35,6 +35,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :contact do
+    sequence(:language){|n| "en_#{n}" }
+    name {"#{language}Shop"}
+    adress 'Delivery drive'
+    phone "+000 15 555 555"
+    email "shop@example.com"
+    company_name "Jinteki"
+    company_reg_nr '123456789'
+    company_vat_nr 'GB123456789'
+    bank 'First world bank'
+    time_table 'Mon.-Fry. 8:00-18:30, Sat. 9:00-17:00, Sun. -'
+    description 'We sell everything you could want to buy...'
+  end
+
   factory :coupon do
     code 'CX-FBT-12ER-VL002-CRG'
     percent 50

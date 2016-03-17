@@ -17,4 +17,17 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def contacts
+    @contacts = Contact.find_by_language I18n.locale
+    if @contacts.nil?
+      @contacts = Contact.find_by_language I18n.default_locale
+    end
+    if @contacts.nil?
+      @contacts = Contact.first
+    end
+    if @contacts.nil?
+      @contacts = Contact.new
+    end
+  end
 end

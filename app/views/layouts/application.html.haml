@@ -24,6 +24,8 @@
     - if flash[:notice]
       .notice
         = flash[:notice]
+    .right
+      = link_to 'Contacts', contacts_path
     #menu
       %span
         = link_to '...'.html_safe, root_path

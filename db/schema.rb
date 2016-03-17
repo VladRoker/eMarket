@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304185243) do
+ActiveRecord::Schema.define(version: 20160307151556) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20160304185243) do
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
+
+  create_table "contacts", force: :cascade do |t|
+    t.string   "language",       null: false
+    t.string   "name",           null: false
+    t.string   "adress"
+    t.string   "phone"
+    t.string   "email"
+    t.string   "company_name",   null: false
+    t.string   "company_reg_nr", null: false
+    t.string   "company_vat_nr", null: false
+    t.text     "bank"
+    t.text     "time_table"
+    t.text     "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "coupons", force: :cascade do |t|
     t.text     "code"
