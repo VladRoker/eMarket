@@ -35,6 +35,12 @@ FactoryGirl.define do
     end
   end
 
+  factory :comment do
+    user
+    product
+    text "This is a nice product. I am really happy I bought it here. It would be more expensive on eBay, but just fine at your store."
+  end
+
   factory :contact do
     sequence(:language){|n| "en_#{n}" }
     name {"#{language}Shop"}

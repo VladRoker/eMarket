@@ -1,12 +1,24 @@
-%h1
-  = @product
-.price.panel.callout
-  = money_helper(@product,'$ ')
-= form_tag add_product_path
-= hidden_field_tag 'id', @product.id
-.small-1
-  = number_field_tag 'count', '1'
-- if @product.available?
-  = submit_tag 'Get it now!', :class => 'button'
-- else
-  %h3 Temporary unavailable
+%div
+  %h1
+    = @product
+  .price.panel.callout
+    = money_helper(@product,'$ ')
+  = form_tag add_product_path
+  = hidden_field_tag 'id', @product.id
+  .small-1
+    = number_field_tag 'count', '1'
+  - if @product.available?
+    = submit_tag 'Get it now!', :class => 'button'
+  - else
+    %h3 Temporary unavailable
+%hr
+.large-4.small-12.medium-7
+  %h3 Comments:
+  - if @comments.empty?
+    Be first to leave your feedback!
+  - else
+    - @comments.each do |comment|
+      %hr
+      %i
+        = I18n.l comment.created_at, format: :short
+      = comment

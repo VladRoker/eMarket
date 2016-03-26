@@ -3,6 +3,8 @@ class Product < ActiveRecord::Base
   belongs_to :category
   has_and_belongs_to_many :orders
   has_and_belongs_to_many :coupons
+  has_many :comments
+  
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
   validates :category_id, presence: true

@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :email,     uniqueness: true
 
   has_many :coupons
+  has_many :comments
 
   def guest?
     self.password_digest.nil?
