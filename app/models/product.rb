@@ -10,6 +10,8 @@ class Product < ActiveRecord::Base
   validates :category_id, presence: true
   validates :quantity, presence: true
 
+  is_impressionable
+
   def to_s
     name
   end

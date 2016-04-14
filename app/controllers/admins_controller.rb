@@ -1,6 +1,11 @@
 class AdminsController < ApplicationController
   before_action :test_access
   def index
+    @products       = Product.all.order(:counter_cache).limit(5)
+    @users          = Impression.uniq.pluck('session_hash').count
+    @registrations  = User.where('created_at >= ?', 1.week.ago).count
+    @orders         = Order.where('created_at >= ?', 1.week.ago).count
+    @lefties        = Impression.where("controller_name == 'products' AND action_name == 'add'").pluck('session_hash').count # Carts that have been left behind
   end
 
   def new_contact

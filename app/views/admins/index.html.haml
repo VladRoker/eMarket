@@ -1,8 +1,6 @@
 %h1 Welcome to admin control panel
 %ul
   %li
-    = link_to "Dash", admin_path, :class => 'disabled'
-  %li
     = link_to "Orders", admin_orders_path
   %li
     = link_to "Clients", admin_users_path
@@ -16,3 +14,24 @@
     = link_to "Delivery Options", '#', :class => 'disabled'
   %li
     = link_to "Overall information", admin_contacts_path
+%hr
+%ul
+  %h3 Top Products:
+  - @products.each do |p|
+    %li
+      = p
+      - @views = p.impressionist_count(:filter=>:session_hash)
+      = " -- #{pluralize(@views, 'unique view')}"
+%hr
+%h4
+  Customers this week:
+  = @users
+%h4
+  Registrations this week:
+  = @registrations
+%h4
+  Orders this week:
+  = @orders
+%h4
+  Abandoned carts this week:
+  = @lefties

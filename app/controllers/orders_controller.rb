@@ -35,9 +35,9 @@ class OrdersController < ApplicationController
           if @price < 0
             @price = 0
           end
+          @coupon.used_flag = true
+          @coupon.save!
         end
-        @coupon.used_flag = true
-        @coupon.save!
       end
       order.price = @price
       if @products && order.save

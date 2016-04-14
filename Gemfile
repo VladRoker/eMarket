@@ -36,6 +36,7 @@ gem 'foundation-rails'
 gem 'haml'
 gem 'thin'
 gem 'ancestry'
+gem 'impressionist'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
