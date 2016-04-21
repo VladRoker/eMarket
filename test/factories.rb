@@ -35,6 +35,22 @@ FactoryGirl.define do
     end
   end
 
+  factory :delivery do ### user delivery address
+    country "Great Britain"
+    city "London"
+    address "Baker street 221B"
+    zip "GB1010"
+    info "Available after 6:30 pm"
+    factory :user_delivery do
+      # user
+      association :deliverable, factory: :user
+    end
+    factory :order_delivery do
+      # order
+      association :deliverable, factory: :order
+    end
+  end
+
   factory :comment do
     user
     product

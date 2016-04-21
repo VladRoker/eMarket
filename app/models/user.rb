@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :coupons
   has_many :comments
+  has_many :deliveries, :as => :deliverable
 
   def guest?
     self.password_digest.nil?

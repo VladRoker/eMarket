@@ -5,6 +5,7 @@ class Order < ActiveRecord::Base
 
   validates :status,  presence: true
   validates :price,   presence: true
+  has_many :deliveries, :as => :deliverable
 
   def to_s
     'Order #' + id.to_s
