@@ -17,7 +17,7 @@ class CouponsController < ApplicationController
   end
 
   def create
-    @coupon = Coupon.find_by_code params[:coupon][:code].upcase
+    @coupon = Coupon.find_by_code params[:coupon][:code]
     if !(@coupon.nil?) && @coupon.user.nil?
         @coupon.user = current_user
         @coupon.save!

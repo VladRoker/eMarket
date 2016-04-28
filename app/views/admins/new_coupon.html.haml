@@ -1,0 +1,7 @@
+.large-4.small-12.medium-7
+  %h3 Create Coupon
+  = form_for @coupon, url: admin_path do |f|
+    = f.text_field :code, :placeholder => 'code'
+    = f.text_field :amount, :placeholder => 'amount'
+    = f.text_field :percent, :placeholder => 'percent'
+    = f.submit 'Create', :class => 'button'

@@ -16,6 +16,27 @@ class AdminsController < ApplicationController
     @contacts = Contact.all
   end
 
+  def coupons
+    @coupons = Coupon.all
+  end
+
+  def coupon
+    @coupon = Coupon.find params[:id]
+  end
+
+  def new_coupon
+    @save = 10 ### Backup system (just in case of large amount of unlucky tries)
+    begin
+      @random = [('a'..'z'), ('A'..'Z')].map { |i| i.to_a }.flatten
+      @random = (0...24).map { @random[rand(@random.length)] }.join.scan(/.{6}|.+/).join('-')
+      @save -= 1
+      if @save < 0
+        break
+      end
+    end while !(Coupon.find_by_code(@random).nil?)
+    @coupon = Coupon.new(:code => @random)
+  end
+
   def users
     @users = User.all
   end
@@ -72,8 +93,12 @@ class AdminsController < ApplicationController
         category.save!
       end
       redirect_to admin_category_page_path(category.id || '0')
-    elsif params[:cupon]
-      render :json => params[:cupon]
+    elsif params[:coupon]
+      coupon = Coupon.new(params.require(:coupon).permit(:code, :amount, :percent))
+      if coupon
+        coupon.save!
+      end
+      redirect_to admin_path
     elsif params[:delivery]
       render :json => params[:delivery]
     elsif params[:contact]
@@ -97,6 +122,9 @@ class AdminsController < ApplicationController
     elsif params[:type] == 'contact'
       Contact.find(params[:id]).delete
       redirect_to admin_contacts_path
+    elsif params[:type] == 'coupon'
+      Coupon.find(params[:id]).delete
+      redirect_to admin_coupons_path
     else
       redirect_to admin_path
     end
@@ -127,8 +155,12 @@ class AdminsController < ApplicationController
         category.update_attributes(params.require(:category).permit(:name, :description, :ancestry))
       end
       redirect_to admin_category_page_path(params[:category][:id] || '0')
-    elsif params[:cupon]
-      render :json => params[:cupon]
+    elsif params[:coupon]
+      coupon = Coupon.find_by_code params[:coupon][:code]
+      if coupon
+        coupon.update_attributes(params.require(:coupon).permit(:code, :amount, :percent))
+      end
+      redirect_to admin_coupon_page_path(coupon.id)
     elsif params[:delivery]
       render :json => params[:delivery]
     elsif params[:contact]

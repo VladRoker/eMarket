@@ -1,0 +1,5 @@
+= link_to "Create coupon", admin_new_coupon_path, :class => 'button'
+%ul
+  - @coupons.each do |coupon|
+    %li
+      = link_to coupon, admin_coupon_page_path(coupon.id)

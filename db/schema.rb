@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328122533) do
+ActiveRecord::Schema.define(version: 20160415105831) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -64,6 +64,20 @@ ActiveRecord::Schema.define(version: 20160328122533) do
 
   add_index "coupons_products", ["coupon_id"], name: "index_coupons_products_on_coupon_id"
   add_index "coupons_products", ["product_id"], name: "index_coupons_products_on_product_id"
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer  "deliverable_id"
+    t.string   "deliverable_type"
+    t.string   "country",          null: false
+    t.string   "city",             null: false
+    t.string   "address",          null: false
+    t.string   "zip",              null: false
+    t.text     "info"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "deliveries", ["deliverable_type", "deliverable_id"], name: "index_deliveries_on_deliverable_type_and_deliverable_id"
 
   create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"

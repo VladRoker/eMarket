@@ -1,0 +1,13 @@
+.large-4.small-12.medium-7
+  %h3
+    = "Coupon \##{@coupon.code}"
+  - unless @coupon.user.nil?
+    %h4
+      Belongs to
+      = link_to @coupon.user, admin_user_page_path(@coupon.user.id)
+  = form_for @coupon, url: admin_path do |f|
+    = f.text_field :code, :placeholder => 'code'
+    = f.text_field :amount, :placeholder => 'amount'
+    = f.text_field :percent, :placeholder => 'percent'
+    = f.submit 'Save', :class => 'button'
+  = link_to 'Delete', admin_delete_path(:coupon, @coupon.id), :method => :delete, :confirm => 'Realy delete?'
