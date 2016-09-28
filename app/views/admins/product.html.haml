@@ -11,5 +11,8 @@
     = f.check_box :sale_flag
     %hr
     = f.collection_select :category_id, categories, :id, :name
+    %hr
+    = image_tag @product.image.url.to_s if @product.image
+    = f.file_field :image
     = f.submit 'Save', :class => 'button'
   = link_to 'Delete', admin_delete_path(:product, @product.id), :method => :delete, :confirm => 'Realy delete?'

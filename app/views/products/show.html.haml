@@ -1,6 +1,10 @@
 %div
   %h1
     = @product
+  .media-object
+    .media-object-section
+      .thumbnail
+        = image_tag @product.image.url.to_s
   .price.panel.callout
     = money_helper(@product,'$ ')
   = form_tag add_product_path
@@ -11,6 +15,11 @@
     = submit_tag 'Get it now!', :class => 'button'
   - else
     %h3 Temporary unavailable
+- unless @product.showcase.empty?
+  %hr
+  .row
+    - @product.showcase.each do |showcase|
+      = image_tag showcase.image.url.to_s
 %hr
 .large-4.small-12.medium-7
   %h3 Comments:

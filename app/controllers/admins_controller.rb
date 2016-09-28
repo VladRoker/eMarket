@@ -82,7 +82,7 @@ class AdminsController < ApplicationController
 
   def create
     if params[:product]
-      product = Product.new(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity))
+      product = Product.new(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image))
       if product
         product.save!
       end
@@ -146,7 +146,7 @@ class AdminsController < ApplicationController
     elsif params[:product]
       product = Product.find(params[:product][:id])
       if product
-        product.update_attributes(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity))
+        product.update_attributes(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image))
       end
       redirect_to admin_product_page_path(params[:product][:id] || '0')
     elsif params[:category]

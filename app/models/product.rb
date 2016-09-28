@@ -4,6 +4,7 @@ class Product < ActiveRecord::Base
   has_and_belongs_to_many :orders
   has_and_belongs_to_many :coupons
   has_many :comments
+  has_many :showcase
   
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true
@@ -11,6 +12,8 @@ class Product < ActiveRecord::Base
   validates :quantity, presence: true
 
   is_impressionable
+
+  mount_uploader :image, ImageUploader
 
   def to_s
     name
@@ -23,7 +26,6 @@ class Product < ActiveRecord::Base
   def full_price
     self.sale_flag ? self.discount : self.price
   end
-
   private
 
   def set_defaults
