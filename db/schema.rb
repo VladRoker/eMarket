@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511155241) do
+ActiveRecord::Schema.define(version: 20161020033852) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160511155241) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "slug_en",     null: false
   end
 
   add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
@@ -135,6 +136,7 @@ ActiveRecord::Schema.define(version: 20160511155241) do
     t.datetime "updated_at",                                            null: false
     t.integer  "counter_cache"
     t.string   "image"
+    t.string   "slug_en",                                               null: false
   end
 
   create_table "showcases", force: :cascade do |t|

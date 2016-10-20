@@ -82,13 +82,13 @@ class AdminsController < ApplicationController
 
   def create
     if params[:product]
-      product = Product.new(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image))
+      product = Product.new(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image, :slug_en))
       if product
         product.save!
       end
       redirect_to admin_product_page_path(product.id || '0')
     elsif params[:category]
-      category = Category.new(params.require(:category).permit(:name, :description, :ancestry))
+      category = Category.new(params.require(:category).permit(:name, :description, :ancestry, :slug_en))
       if category
         category.save!
       end
@@ -146,13 +146,13 @@ class AdminsController < ApplicationController
     elsif params[:product]
       product = Product.find(params[:product][:id])
       if product
-        product.update_attributes(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image))
+        product.update_attributes(params.require(:product).permit(:name, :price, :discount, :sale_flag, :description, :category_id, :quantity, :image, :slug_en))
       end
       redirect_to admin_product_page_path(params[:product][:id] || '0')
     elsif params[:category]
       category = Category.find(params[:category][:id])
       if category
-        category.update_attributes(params.require(:category).permit(:name, :description, :ancestry))
+        category.update_attributes(params.require(:category).permit(:name, :description, :ancestry, :slug_en))
       end
       redirect_to admin_category_page_path(params[:category][:id] || '0')
     elsif params[:coupon]

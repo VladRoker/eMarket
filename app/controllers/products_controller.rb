@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def show
-    @product  = Product.find params[:id]
+    @product  = Product.friendly.find params[:id]
     @category = @product.category
     @comments = @product.comments
   end

@@ -10,10 +10,15 @@ class Product < ActiveRecord::Base
   validates :price, presence: true
   validates :category_id, presence: true
   validates :quantity, presence: true
+  validates :slug_en, presence: true, uniqueness: true
 
   is_impressionable
 
   mount_uploader :image, ImageUploader
+
+
+  extend FriendlyId
+  friendly_id :name, :use => [:slugged, :simple_i18n]
 
   def to_s
     name
