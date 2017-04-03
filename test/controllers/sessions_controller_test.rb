@@ -7,12 +7,12 @@ class SessionsControllerTest < ActionController::TestCase
   end
   test "create user session" do
     @user = create(:registred_user)
-    post :create, user: {email: @user.email, password: @user.password}
+    post :create, params: { user: {email: @user.email, password: @user.password} }
     assert_redirected_to root_path
   end
   test "create user incorrect session fail" do
     @user = create(:registred_user)
-    post :create, user: {email: @user.email, password: "__#{@user.password}__"}
+    post :create, params: { user: {email: @user.email, password: "__#{@user.password}__"} }
     assert_redirected_to login_path
   end
   test "destroy user session" do

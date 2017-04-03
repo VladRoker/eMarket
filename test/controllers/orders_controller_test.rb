@@ -7,7 +7,7 @@ class OrdersControllerTest < ActionController::TestCase
   end
   test "get order if user" do
     @user = create(:registred_user)
-    get :new, nil, {user_id: @user.id}
+    get :new, params: nil, session: {user_id: @user.id}
     assert_response :success
   end
   # test "save empty order fails" do

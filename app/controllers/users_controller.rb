@@ -6,7 +6,8 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(user_params)
-    if params[:user][:password].nil?
+    if params[:user][:password].nil? || params[:user][:password].empty?
+      # puts 'Yay!!!!!'
       redirect_to sign_up_path
     else
       if user.save

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020033852) do
+ActiveRecord::Schema.define(version: 20170401230608) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -20,9 +19,8 @@ ActiveRecord::Schema.define(version: 20161020033852) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "slug_en",     null: false
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
-
-  add_index "categories", ["ancestry"], name: "index_categories_on_ancestry"
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -61,14 +59,13 @@ ActiveRecord::Schema.define(version: 20161020033852) do
   create_table "coupons_products", id: false, force: :cascade do |t|
     t.integer "coupon_id"
     t.integer "product_id"
+    t.index ["coupon_id"], name: "index_coupons_products_on_coupon_id"
+    t.index ["product_id"], name: "index_coupons_products_on_product_id"
   end
 
-  add_index "coupons_products", ["coupon_id"], name: "index_coupons_products_on_coupon_id"
-  add_index "coupons_products", ["product_id"], name: "index_coupons_products_on_product_id"
-
   create_table "deliveries", force: :cascade do |t|
-    t.integer  "deliverable_id"
     t.string   "deliverable_type"
+    t.integer  "deliverable_id"
     t.string   "country",          null: false
     t.string   "city",             null: false
     t.string   "address",          null: false
@@ -76,9 +73,8 @@ ActiveRecord::Schema.define(version: 20161020033852) do
     t.text     "info"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["deliverable_type", "deliverable_id"], name: "index_deliveries_on_deliverable_type_and_deliverable_id"
   end
-
-  add_index "deliveries", ["deliverable_type", "deliverable_id"], name: "index_deliveries_on_deliverable_type_and_deliverable_id"
 
   create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"
@@ -94,16 +90,17 @@ ActiveRecord::Schema.define(version: 20161020033852) do
     t.text     "referrer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "params"
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
+    t.index ["user_id"], name: "index_impressions_on_user_id"
   end
-
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
-  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -112,17 +109,15 @@ ActiveRecord::Schema.define(version: 20161020033852) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "coupon_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
-
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "orders_products", id: false, force: :cascade do |t|
     t.integer "order_id"
     t.integer "product_id"
+    t.index ["order_id"], name: "index_orders_products_on_order_id"
+    t.index ["product_id"], name: "index_orders_products_on_product_id"
   end
-
-  add_index "orders_products", ["order_id"], name: "index_orders_products_on_order_id"
-  add_index "orders_products", ["product_id"], name: "index_orders_products_on_product_id"
 
   create_table "products", force: :cascade do |t|
     t.string   "name",                                                  null: false
